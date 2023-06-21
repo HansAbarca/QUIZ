@@ -21,7 +21,10 @@ namespace FrontEnd.Controllers
         // GET: EmpleadoController/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            empleadoHelper = new EmpleadoHelper();
+            EmpleadoViewModel empleado = empleadoHelper.GetByID(id);
+
+            return View(empleado);
         }
 
         // GET: EmpleadoController/Create

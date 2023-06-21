@@ -12,6 +12,7 @@ namespace FrontEnd.Helpers
         {
             repository = new ServiceRepository();
         }
+        #region Getall
         public List<EmpleadoViewModel> GetAll()
         {
             List<EmpleadoViewModel> lista;
@@ -25,5 +26,19 @@ namespace FrontEnd.Helpers
 
             return new List<EmpleadoViewModel>();
         }
+        #endregion
+        #region GetByID
+        public EmpleadoViewModel GetByID(int id)
+        {
+            EmpleadoViewModel empleado = new EmpleadoViewModel();
+
+            HttpResponseMessage responseMessage = repository.GetResponse("api/Empleado/" + id);
+
+            string content = responseMessage.Content.ReadAsStringAsync().Result;
+            empleado = JsonConvert.DeserializeObject<EmpleadoViewModel>(content);
+
+            return empleado;
+        }
+        #endregion
     }
 }
