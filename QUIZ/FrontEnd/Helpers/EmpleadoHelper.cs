@@ -51,5 +51,15 @@ namespace FrontEnd.Helpers
         }
 
         #endregion
+        #region update
+        public EmpleadoViewModel Add(EmpleadoViewModel empleado)
+        {
+            HttpResponseMessage responseMessage = repository.PostResponse("api/Empleado/", empleado);
+            var content = responseMessage.Content.ReadAsStringAsync().Result;
+            EmpleadoViewModel empleadoAPI = JsonConvert.DeserializeObject<EmpleadoViewModel>(content);
+
+            return empleadoAPI;
+        }
+        #endregion
     }
 }

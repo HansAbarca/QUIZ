@@ -36,10 +36,13 @@ namespace FrontEnd.Controllers
         // POST: EmpleadoController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(EmpleadoViewModel empleado)
         {
             try
             {
+                empleadoHelper = new EmpleadoHelper();
+                empleado = empleadoHelper.Add(empleado);
+
                 return RedirectToAction(nameof(Index));
             }
             catch
