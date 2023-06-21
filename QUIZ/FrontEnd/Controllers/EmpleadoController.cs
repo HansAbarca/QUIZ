@@ -51,16 +51,21 @@ namespace FrontEnd.Controllers
         // GET: EmpleadoController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            empleadoHelper = new EmpleadoHelper();
+            EmpleadoViewModel empleado = empleadoHelper.GetByID(id);
+
+            return View(empleado);
         }
 
         // POST: EmpleadoController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(EmpleadoViewModel empleado)
         {
             try
             {
+
+
                 return RedirectToAction(nameof(Index));
             }
             catch
