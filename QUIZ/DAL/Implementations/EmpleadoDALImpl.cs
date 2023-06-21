@@ -17,7 +17,19 @@ namespace DAL.Implementations
         private UnidadDeTrabajo<Empleado> unidad;
         public bool Add(Empleado entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                using (unidad = new UnidadDeTrabajo<Empleado>(new QUIZContext()))
+                {
+                    unidad.genericDAL.Add(entity);
+                    unidad.Complete();
+                }
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
 
         public void AddRange(IEnumerable<Empleado> entities)

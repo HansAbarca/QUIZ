@@ -68,8 +68,10 @@ namespace BackEnd.Controllers
 
         // POST api/<EmpleadoController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public JsonResult Post([FromBody] EmpleadoModel empleado)
         {
+            empleadoDAL.Add(Convertir(empleado));
+            return new JsonResult(empleado);
         }
 
         // PUT api/<EmpleadoController>/5
