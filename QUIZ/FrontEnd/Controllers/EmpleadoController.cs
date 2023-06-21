@@ -64,7 +64,8 @@ namespace FrontEnd.Controllers
         {
             try
             {
-
+                empleadoHelper = new EmpleadoHelper();
+                empleado = empleadoHelper.Edit(empleado);
 
                 return RedirectToAction(nameof(Index));
             }
