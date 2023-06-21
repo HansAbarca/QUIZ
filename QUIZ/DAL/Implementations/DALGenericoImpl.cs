@@ -10,8 +10,9 @@ using System.Threading.Tasks;
 
 namespace DAL.Implementations
 {
-    internal class DALGenericoImpl<TEntity> : IDALGenerico<TEntity> where TEntity : class
+    public class DALGenericoImpl<TEntity> : IDALGenerico<TEntity> where TEntity : class
     {
+
         protected readonly QUIZContext Context;
 
         public DALGenericoImpl(QUIZContext context)
@@ -61,11 +62,11 @@ namespace DAL.Implementations
             }
         }
 
-        public async Task<TEntity> Get(int id)
+        public TEntity Get(int id)
         {
             try
             {
-                return await Context.Set<TEntity>().FindAsync(id);
+                return Context.Set<TEntity>().Find(id);
             }
             catch (Exception)
             {
@@ -74,11 +75,11 @@ namespace DAL.Implementations
             }
         }
 
-        public async Task<IEnumerable<TEntity>> GetAll()
+        public IEnumerable<TEntity> GetAll()
         {
             try
             {
-                return await Context.Set<TEntity>().ToListAsync();
+                return Context.Set<TEntity>().ToList();
             }
             catch (Exception)
             {

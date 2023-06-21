@@ -30,9 +30,15 @@ namespace DAL.Implementations
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Empleado> Get(int id)
+        public Empleado Get(int id)
         {
-            throw new NotImplementedException();
+            Empleado empleado = null;
+            using (unidad = new UnidadDeTrabajo<Empleado>(new QUIZContext()))
+            {
+                empleado = unidad.genericDAL.Get(id);
+
+            }
+            return empleado;
         }
 
         public IEnumerable<Empleado> GetAll()
@@ -62,6 +68,11 @@ namespace DAL.Implementations
         }
 
         public bool Update(Empleado entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        Empleado IDALGenerico<Empleado>.Get(int id)
         {
             throw new NotImplementedException();
         }

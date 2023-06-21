@@ -1,4 +1,6 @@
-﻿using DAL.Interfaces;
+﻿using DAL.Implementations;
+using DAL.Interfaces;
+using Entities.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -15,14 +17,16 @@ namespace BackEnd.Controllers
         
         public EmpleadoController()
         {
-
+            empleadoDAL = new EmpleadoDALImpl();
         }
 
         // GET: api/<EmpleadoController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public JsonResult Get()
         {
-            return new string[] { "value1", "value2" };
+            IEnumerable<Empleado> empleados = empleadoDAL.GetAll();
+
+            return new JsonResult(empleados);
         }
 
         // GET api/<EmpleadoController>/5
