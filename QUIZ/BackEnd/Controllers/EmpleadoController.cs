@@ -1,4 +1,5 @@
-﻿using DAL.Implementations;
+﻿using BackEnd.Models;
+using DAL.Implementations;
 using DAL.Interfaces;
 using Entities.Entities;
 using Microsoft.AspNetCore.Mvc;
@@ -14,7 +15,27 @@ namespace BackEnd.Controllers
     {
         private IEmpleadoDAL empleadoDAL;
 
-        
+        private EmpleadoModel Convertir(Empleado empleado)
+        {
+            return new EmpleadoModel
+            {
+                EmpleadoId = empleado.EmpleadoId,
+                Nombre = empleado.Nombre,
+                Salario = empleado.Salario
+            };
+        }
+
+        private Empleado Convertir(EmpleadoModel empleado)
+        {
+            return new Empleado
+            {
+                EmpleadoId = empleado.EmpleadoId,
+                Nombre = empleado.Nombre,
+                Salario = empleado.Salario
+            };
+        }
+
+
         public EmpleadoController()
         {
             empleadoDAL = new EmpleadoDALImpl();
@@ -25,15 +46,24 @@ namespace BackEnd.Controllers
         public JsonResult Get()
         {
             IEnumerable<Empleado> empleados = empleadoDAL.GetAll();
+            List<EmpleadoModel> models = new List<EmpleadoModel>();
 
-            return new JsonResult(empleados);
+            foreach (var empleado in empleados)
+            {
+                models.Add(Convertir(empleado));
+            }
+
+            return new JsonResult(models);
         }
 
         // GET api/<EmpleadoController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public JsonResult Get(int id)
         {
-            return "value";
+            
+            Empleado empleado = empleadoDAL.Get(id);
+
+            return new JsonResult(Convertir(empleado));
         }
 
         // POST api/<EmpleadoController>
