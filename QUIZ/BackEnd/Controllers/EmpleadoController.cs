@@ -74,9 +74,10 @@ namespace BackEnd.Controllers
 
         // PUT api/<EmpleadoController>/5
         [HttpPut]
-        public void Put(int id, [FromBody] string value)
+        public JsonResult Put(int id, [FromBody] EmpleadoModel empleado)
         {
-
+            empleadoDAL.Update(Convertir(empleado));
+            return new JsonResult(empleado);
         }
 
         // DELETE api/<EmpleadoController>/5

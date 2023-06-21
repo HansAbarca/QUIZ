@@ -74,6 +74,7 @@ namespace DAL.Implementations
                 using (unidad = new UnidadDeTrabajo<Empleado>(new QUIZContext()))
                 {
                     unidad.genericDAL.Update(entity);
+                    unidad.Complete();
                 }
                 return true;
             }catch (Exception)
