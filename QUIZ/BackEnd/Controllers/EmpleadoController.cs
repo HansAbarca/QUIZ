@@ -86,6 +86,12 @@ namespace BackEnd.Controllers
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            Empleado empleado = new Empleado
+            {
+                EmpleadoId = id
+            };
+
+            empleadoDAL.Remove(empleado);
         }
     }
 }

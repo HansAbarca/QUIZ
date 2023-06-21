@@ -66,7 +66,19 @@ namespace DAL.Implementations
 
         public bool Remove(Empleado entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                using (unidad = new UnidadDeTrabajo<Empleado>(new QUIZContext()))
+                {
+                    unidad.genericDAL.Remove(entity);
+                    unidad.Complete();
+                }
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
 
         public void RemoveRange(IEnumerable<Empleado> entities)

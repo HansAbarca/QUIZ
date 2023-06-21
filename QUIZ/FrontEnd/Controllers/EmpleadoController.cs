@@ -81,16 +81,21 @@ namespace FrontEnd.Controllers
         // GET: EmpleadoController/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            empleadoHelper = new EmpleadoHelper();
+            EmpleadoViewModel empleado = empleadoHelper.GetByID(id);
+
+            return View(empleado);
         }
 
         // POST: EmpleadoController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(EmpleadoViewModel empleado)
         {
             try
             {
+                empleadoHelper = new EmpleadoHelper();
+                empleadoHelper.Delete(empleado.EmpleadoId);
                 return RedirectToAction(nameof(Index));
             }
             catch

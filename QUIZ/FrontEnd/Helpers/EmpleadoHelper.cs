@@ -61,5 +61,17 @@ namespace FrontEnd.Helpers
             return empleadoAPI;
         }
         #endregion
+        #region remove
+        public EmpleadoViewModel Delete(int id)
+        {
+            EmpleadoViewModel empleado = new EmpleadoViewModel();
+
+            HttpResponseMessage responseMessage = repository.DeleteResponse("api/Empleado/" + id);
+/*            var content = responseMessage.Content.ReadAsStringAsync().Result;
+            EmpleadoViewModel empleadoAPI = JsonConvert.DeserializeObject<EmpleadoViewModel>(content);*/
+
+            return empleado;
+        }
+        #endregion
     }
 }
