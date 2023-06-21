@@ -73,9 +73,10 @@ namespace BackEnd.Controllers
         }
 
         // PUT api/<EmpleadoController>/5
-        [HttpPut("{id}")]
+        [HttpPut]
         public void Put(int id, [FromBody] string value)
         {
+
         }
 
         // DELETE api/<EmpleadoController>/5

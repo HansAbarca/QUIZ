@@ -69,7 +69,18 @@ namespace DAL.Implementations
 
         public bool Update(Empleado entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                using (unidad = new UnidadDeTrabajo<Empleado>(new QUIZContext()))
+                {
+                    unidad.genericDAL.Update(entity);
+                }
+                return true;
+            }catch (Exception)
+            {
+                return false;
+            }
+
         }
 
         Empleado IDALGenerico<Empleado>.Get(int id)
